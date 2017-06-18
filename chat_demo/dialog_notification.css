@@ -1,0 +1,143 @@
+.notification-list {
+  position: fixed;
+  bottom: 0px;
+  right: 30px;
+  width: 288px;
+}
+.notification-list:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  width: 288px;
+  height: 46px;
+  background: url(../images/not-head.png) no-repeat center;
+}
+.notification-list > li {
+  padding: 2px 0px 5px;
+  background-color: #f7f6f6;
+}
+.notification-list > li + li {
+  border-top: 4px solid #4E598D;
+}
+.notification-list > li:hover > span i {
+  display: block;
+}
+.notification-list > li > span {
+  display: block;
+  line-height: 20px;
+  padding: 0px 5px 0px 15px;
+  color: #fff;
+  background-color: #1C928B;
+  margin: 0px;
+}
+.notification-list > li > span i {
+  display: none;
+  float: right;
+  margin-top: 3px;
+  height: 14px;
+  width: 14px;
+  text-align: center;
+  line-height: 14px;
+  background-color: #fff;
+  font-size: 6px;
+  font-weight: 100;
+  color: #1C928B;
+}
+.notification-list > li .notification-body {
+  padding: 10px 15px;
+  line-height: normal;
+  text-align: left;
+}
+.notification-list > li .notification-body .left-side {
+  width: 170px;
+  height: 100px;
+}
+.notification-list > li .notification-body .left-side p {
+  margin: 0px;
+}
+.notification-list > li .notification-body .left-side p.name {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #045F5A;
+}
+.notification-list > li .notification-body .left-side p.label {
+  display: inline-block;
+  height: 15px;
+  line-height: 12px;
+  margin-bottom: 5px;
+}
+.notification-list > li .notification-body .right-side {
+  position: relative;
+  width: 80px;
+  height: 95px;
+  line-height: 76px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.notification-list > li .notification-body .right-side img {
+  height: 80px;
+  max-width: 100%;
+}
+.notification-list > li .notification-body .right-side span {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  line-height: 15px;
+  background: #1C928B;
+  color: #fff;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+.notification-list > li .notification-body .gift-msg {
+  position: relative;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  clear: both;
+}
+.notification-list > li .notification-body .gift-msg:before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 85%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-bottom: 5px solid #fff;
+  z-index: 2;
+}
+.notification-list > li .notification-body .gift-msg:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 85%;
+  margin-left: -6px;
+  border: 6px solid transparent;
+  border-bottom: 6px solid #ccc;
+  z-index: 1;
+}
+.notification-list > li .notification-body .gift-msg p {
+  margin: 0px;
+  height: 30px;
+}
+.notification-list > li .notification-body .links {
+  margin-top: 10px;
+}
+.notification-list > li .notification-body .links .btn i {
+  margin-right: 5px;
+}
+.notification-list > li .notification-body .links .btn-primary {
+  text-align: left;
+}
+.notification-list > li .notification-body .links .btn i, .notification-list > li .notification-body .links .btn span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.1;
+}
+.notification-list > li .notification-body .links .links-group {
+  margin-left: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}

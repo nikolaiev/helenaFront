@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ua">
+	<head>	
+		<title>Chat</title>	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />		
+		<link rel='stylesheet' type='text/css' media='all' href='style.css' />
+		<link rel='stylesheet' type='text/css' media='all' href='chatMan.css' />
+		<link rel='stylesheet' type='text/css' media='all' href='css/alertify.default.css' />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		
+		<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+		<script type="text/javascript" src="js/socket.io-1.4.5.js"></script>
+		<script src="js/RTCMultiConnection.js"></script>
+		<script src="js/alertify.min.js"></script>
+		<script type="text/javascript" src="js/chatWindowMan.js"></script>
+		<script type="text/javascript" src="js/handlebars.min.js"></script>
+		
+	</head>
+	<body class="male" style="background:#fff;">	
+				
+		<div id="top-line">
+			<div class="container"></div>
+		</div>
+		<div id="sub-top-line" class="w border-b">
+		  <div class="container">
+		    <a class="small-logo" href="#"><img src="../images/s-logo.png"></a>
+		  </div>
+		</div>
+
+		<div class="chat-window-group clearfix">
+			<div id="chat-left-panel">
+				<h2><span id="onl_text"><!--Online ladies--></span><span class="text-light" id="user_count"></span></h2>
+				<div class="potential-partners" id="potential-partners-id"></div>	
+				<p class="pager-title">Page:</p>
+				<div class="paginator">
+					<div class="next" id='prev_button' style="display:none"><a>Prev</a></div>
+					<ul id="_paginator" class="text-center"></ul>
+					<div class="prev" id='next_button' style="display:none"><a>Next</a></div>
+				</div>				
+			</div>
+			
+			<div id="chat-window" class=""> <!-- Add class blocked when there's no money on account -->
+				<div class="chat-body-wrap">
+					<h2><span id='com_type'>Live chat</span></h2>
+
+					<div id="chat" style="display:none">
+						<div class="content">
+							<div class='companion-info'>
+								<div class='companion-avatar pull-left' id='partner_image'>
+								</div>
+								<p class='companion-id'>
+									<span class='name' id="partner_name"></span>
+									<span class='label label-primary' id="partner_id"></span>
+								</p>
+								<div class='short-info'>
+									<p id="partner_age"></p>
+									<p>
+										<span id="partner_hair"></span>
+										, 
+										<span id="partner_eyes"></span>
+									</p>
+									
+									<p style='text-transform: capitalize;'>
+										<span id="partner_map_city"></span> 
+										<span id="partner_map_country"></span>
+									</p>
+								</div>
+								<ul class="col-md-7">
+									<li class="favorite delete" id="999"><a><!--i class=\"icon-star\" title=\"Add to favorites\"></i--><i class="icon-star" title="Delete from favorites"></i></a></li>
+									<li><a href="" title="Date me"><i class="icon-heart"></i></a></li> <!-- if($viewUser->get('sex')==2) -->
+									<li><a class="vc" href="" title="Video date"><i class="icon-facetime-video"></i></a></li> <!--$viewUser->is_offline()? offline-->
+									<li><a href="" title="Call me"><i class="icon-phoneold"></i></a></li>
+									<li><a href="" title="Presents & flowers"><i class="icon-flower"></i></a></li><!-- if($viewUser->get('sex')==2) -->
+									<li><a href="" title="Virtual gift"><i class="icon-gift"></i></a></li>
+									<li><a href="/messages/send/999" title="Email me"><i class="icon-emailalt"></i></a></li>							
+								</ul>
+							</div>
+							<div class="message-text" id="content"></div>	
+							<div class="chat-warning-message user-offline">
+								Ulia сейчас не в сети и не сможет вам ответить. Начните с ней чат позже.
+							</div>
+							<div class="chat-warning-message no-money">
+								Для продолжения общения в чате нужно минимум 10 кредитов
+								<a href="/balance" target="_blank" class="btn btn-danger"><i class="icon-star"></i>Купить</a>
+							</div>
+						</div>
+						
+						<div id="offline_message" style="display:none"></div>
+						<!--ВРЕМЯ ЧАТА!-->
+						<div class="container_status">
+							<div class="input-message-form">
+							
+								<div class="textarea" contenteditable="true" id="field"></div>
+								<div class="smiles-wrap">
+								
+									<i class='icon-smile smiles' onclick="showSmiles()"></i>
+									
+									<div class='smiles-list' id="_smiles" style="display:none;">
+										<!--$icons-->
+									</div>
+								</div>
+								<div class="links">
+									<div class="btn-wrap pull-left">
+										<a class="btn btn-danger btn-xs"><i class="icon-postalt"></i> Send message</a>
+										<input type="submit" class="" value="Send message" name="send_message" id="send" onclick="sendMessage()">
+									</div>
+									<div class="chat-counter-wrap" id="extra_info" >
+										<p class="chat-time-counter"><i class="icon-timer"></i><span class="chat-time-value" id='timer' >00:00</span></p>
+										<p class="chat-credits-counter"><i class="icon-star"></i><span class="chat-credits-value" id='tokens'>0</span></p>
+									</div>
+								</div>	
+								<div class="input-message-form-warning">Недостаточно кредитов для продолжения</div>
+							</div>					
+						</div>
+					</div>
+				</div>
+				<div class="chat-contact-list">
+					<h2><span id='com_type'>Contact list</span></h2>
+					<div class="pure-u-2-3" style="width:252px" id="video-container">					
+						<!--video id="remoteVideo" autoplay style="width:252px; height:189px"></video-->						
+					</div>				
+					
+					<div class='list-companions'>					
+						<ul id='list-companions-ul'>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	<style>
+		video {
+			width: 100%;
+		}
+		button, input, select {
+			font-family: Myriad, Arial, Verdana;
+			font-weight: normal;
+			border-top-left-radius: 3px;
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+			border-bottom-left-radius: 3px;
+			padding: 4px 12px;
+			text-decoration: none;
+			color: rgb(27, 26, 26);
+			display: inline-block;
+			box-shadow: rgb(255, 255, 255) 1px 1px 0px 0px inset;
+			text-shadow: none;
+			background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0.05, rgb(241, 241, 241)), to(rgb(230, 230, 230)));
+			font-size: 20px;
+			border: 1px solid red;
+			outline:none;
+		}
+		button:active, input:active, select:active, button:focus, input:focus, select:focus {
+			background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(5%, rgb(221, 221, 221)), to(rgb(250, 250, 250)));
+			border: 1px solid rgb(142, 142, 142);
+		}
+		button[disabled], iput[disabled], select[disabled] {
+			background: rgb(249, 249, 249);
+			border: 1px solid rgb(218, 207, 207);
+			color: rgb(197, 189, 189);
+		}
+		input, input:focus, input:active {
+			background: white;    
+		}
+		video::-webkit-media-controls-fullscreen-button {
+			display: none;
+		}
+	</style>
+</html>

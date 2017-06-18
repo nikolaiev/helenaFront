@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ua">
+	<head>	
+		<title>Videodate</title>	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />		
+		<link rel='stylesheet' type='text/css' media='all' href='style.css' />
+		<link rel='stylesheet' type='text/css' media='all' href='videodate.css' />
+		<link rel='stylesheet' type='text/css' media='all' href='css/alertify.default.css' />
+        
+		<script src="js/RTCMultiConnection.min.js"></script>
+        <script src="js/socket.io-1.4.5.js"></script>
+        <!--script src="js/jquery-2.2.0.min.js"></script-->
+		<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+		<!-- custom layout for HTML5 audio/video elements -->
+        <script src="https://cdn.webrtc-experiment.com/getMediaElement.js"></script>
+        <script src="js/alertify.min.js"></script>
+
+        <script type="text/javascript" src="js/dateWindow.js"></script>
+
+		
+	</head>
+	<body class="female" style="background:#fff;">		
+				
+		<div id="top-line">
+			<div class="container">
+			</div>
+		</div>
+		<style>
+			video {
+				object-fit: fill;
+				width: 30%;
+			}
+			button,
+			input,
+			select {
+				font-weight: normal;
+				padding: 2px 4px;
+				text-decoration: none;
+				display: inline-block;
+				text-shadow: none;
+				font-size: 16px;
+				outline: none;
+			}
+
+			.make-center {
+				text-align: center;
+				padding: 5px 10px;
+			}
+		</style>
+		
+	
+		<div id="sub-top-line" class="w">
+			<div class="container">
+				<a class="small-logo" href="/profile"><img src="../images/s-logo.png"/></a>
+				<ul class="sub-menu">
+					<li><a href="/search"><i class="icon-search"></i>Search</a></li>
+					<li class="wide">
+						<a href="/newmessages">
+				          <i class="icon-emailalt"></i>
+				        </a>
+				        <a href="/calls"><i class="icon-phoneold"></i>
+				              <span class="counter">2</span>
+				        </a>
+				        <a href="/my_videodates"><i class="icon-webcam"></i>
+				              <span class="counter">4</span>
+				        </a>
+					</li>
+				</ul>
+			</div>
+		</div>
+			
+
+		<div id="videodate-window">
+			<h2>Videodate with <span id='firstname'></span> <span class="info">(ID: <span id="partner_id"></span>)</span></h2>
+			<div class="vd-local-interface">
+				<div class="vd-video-wrap">
+				
+				<div id="videos-container" class="video-loading-bg"></div>
+				</div>
+				<div class="vd-functional-line clearfix">
+					<div class="pull-left info">
+						Time: <span class="vd-time" id="date_timer">00:00:00</span>&nbsp;&nbsp;&nbsp;
+						<div id="tokens" style="float:right;opacity:0;">Credits: <span class="vd-credits-count" id="credits_amount">0</span> <i class="icon-star"></i></div>
+					</div>
+					<div class="pull-right tools">
+						<a class="first"><i class="icon-microphonealt"></i></a>
+						<a><i class="icon-facetime-video"></i></a>
+						<div class="volume">
+							<i class="icon-volume-up" id="mute"></i>
+							<!--span class="volume-line"></span-->
+							<input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+						</div>
+						<a id="full-screen"><i class="icon-resize-full"></i></a>
+					</div>
+				</div>
+				<div class="vd-administration-line">
+					<div class="logo pull-right">
+						<img src="logo_vd.png">
+					</div>
+					<div class="text">
+						<div class="caption">Manager Helena Date:</div>
+						Товарищи! укрепление и развитие структуры позволяет оценить значение модели развития. Равным образом консультация с широким активом требуют от нас анализа новых предложений. Задача организации, в особенности же рамки и место обучения кадров позволяет оценить значение позиций.
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--script src="js/video-controls.js"></script-->
+	</body>
+</html>

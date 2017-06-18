@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ua">
+	<head>	
+		<title>Dialog notifications</title>	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />		
+		<link rel='stylesheet' type='text/css' media='all' href='style.css' />
+		<link rel='stylesheet' type='text/css' media='all' href='dialog_notification.css' />
+		
+		<script type="text/javascript" src="js/socket.io-1.4.5.js"></script>
+		<script type="text/javascript" src="js/chatWindow.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+		<!--script src='/protected/js_lib/jquery.js' type='text/javascript'></script>
+		
+		<script src='/protected/js_lib/sockjs-0.3.4.min.js' type='text/javascript'></script>
+		<script src='/protected/js_lib/socket-init.js' type='text/javascript'></script>
+		<script src='/protected/view/js/chat.js' type='text/javascript'></script-->		
+	</head>
+	<body class="female" style="background:#fff;">	
+				
+		<div id="top-line">
+			<div class="container">
+			</div>
+		</div>
+		<div id="sub-top-line" class="w">
+		  <div class="container">
+		    <a class="small-logo" href="#"><img src="../images/s-logo.png"></a>
+		    <ul class="sub-menu">
+		      <li>
+		        <a href="/search"><i class="icon-search"></i>Поиск</a>
+		      </li>
+		      <li class="wide">
+		        <a href="/newmessages">
+		          <i class="icon-emailalt"></i>
+		        </a>
+		        <a href="/calls"><i class="icon-phoneold"></i>
+		              <span class="counter">2</span>
+		        </a>
+		        <a href="/my_videodates"><i class="icon-webcam"></i>
+		              <span class="counter">4</span>
+		        </a>
+		      </li>
+		    </ul>
+		    <ul class="sub-menu right">
+		      <li class="wide">
+		        <a href=""><i class="icon-comment"></i>Служба поддержки</a>
+		        <a href=""><i class="icon-user"></i>Помощь</a>
+		      </li>
+		      <li>
+		        <div class="btn-group">
+		          <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+		            <i class="icon-cog"></i>Настройки<span class="caret"></span>
+		          </button>
+		          <ul class="dropdown-menu">
+		            <li><a href="/password"><i class="icon-cog"></i>Пароль</a></li>
+		          </ul>
+		        </div>
+		      </li>
+		      <li><a href="/logout"><i class="icon-exit"></i></a></li>
+		    </ul>
+		  </div>
+		</div>
+
+
+<!--Notifications start-->
+<ul class="notification-list">
+	<!--Chat notification start-->
+	<li>
+		<span>Welcome<i class="icon-remove"></i></span>
+		<div class="notification-body">
+			<div class="left-side pull-left">
+				<p class="name">$firstname</p>
+				<p class="label label-primary">ID: 999</p>
+				<p>Age: 23</p>
+				<p>From: Odessa, Ukraine</p>
+				<p>Blond, green eyes</p>
+			</div>
+			<div class="right-side pull-right">
+				<img src="../tpl/images_v2/real-girl-avatar.jpg">
+				<span class="on">В сети</span>
+			</div>
+			<div class="gift-msg"><p>Hello! How r u?</p></div>
+			<div class="links">
+				<a class="btn btn-success"><i class="icon-notificationbottom"></i><span>Chat Now</span></a>
+				<div class="links-group">
+					<a>No, Thanks</a><br>
+					<a>Add to ignore</a>
+				</div>
+			</div>
+		</div>
+	</li>
+	<!--Chat notification end-->
+
+	<!--VideoChat notification start-->
+	<li>
+		<span>Welcome<i class="icon-remove"></i></span>
+		<div class="notification-body">
+			<div class="left-side pull-left">
+				<p class="name">$firstname</p>
+				<p class="label label-primary">ID: 999</p>
+				<p>Age: 23</p>
+				<p>From: Odessa, Ukraine</p>
+				<p>Blond, green eyes</p>
+			</div>
+			<div class="right-side pull-right">
+				<img src="../tpl/images_v2/real-girl-avatar.jpg">
+				<span class="on">В сети</span>
+			</div>
+			<div class="gift-msg"><p>Hello! How r u?</p></div>
+			<div class="links">
+				<a class="btn btn-primary"><i class="icon-facetime-video"></i><span>Chat Now<br>With Video</span></a>
+				<div class="links-group">
+					<a>No, Thanks</a><br>
+					<a>Add to ignore</a>
+				<div>
+			</div>
+		</div>
+	</li>
+	<!--VideoChat notification end-->
+</ul>
+<!--Notifications end-->
+</body>
+</html>
