@@ -12,9 +12,9 @@ let sex;
 
 $(document).ready(function(){
 
-
     let _protocol=location.protocol==="http:"?"ws":"wss";
-    let videoRTCPort=location.protocol==="http:"?':9085':':9083';//для установки видеосвязи!
+    //let videoRTCPort=location.protocol==="http:"?':9085':':9083';//для установки видеосвязи!
+    let videoRTCPort=location.protocol==="http:"?':9083':':9083';//для установки видеосвязи!
     let dateServPort=location.protocol==="http:"?':9005':':9003';//для получения комманд сервера
 	
 	socket = io.connect(_protocol+'://'+location.hostname+dateServPort,{resource:'socket','force new connection':true});
@@ -27,7 +27,10 @@ $(document).ready(function(){
 	});	
 	
 	socket.on('close this connection',function(data){
-		if(data.force||room==data.room)
+		console.log('close this connection');
+		console.log(data);
+
+		if(data.force||room.toString()===data.room.toString())
 		{	
 			//тройная защита 
 			connection.leave();
@@ -43,18 +46,18 @@ $(document).ready(function(){
 
 	//TODO replace with isBroadcaster present check!!!
 	socket.on('connect to the room',function(room_id){
+		/*TODO fix room variable is undefined*/
 		room=room_id;
-
-		if(sex.toString()==='1')
-			connection.join(room);//Ж - присоединяется!
-		else
-			connection.open(room);//М - открывает!
+        console.log("ROOM IS "+room)
+        connection.openOrJoin(room_id);//Ж - присоединяется!
 	});
 	
 
 	
 	//если 10 мин прошло, то сообщение о дополнительных взъемах денег
 	socket.on('videodate for additional money',function(data){
+		console.log('videodate for additional money')
+		console.log(data)
 		if(room.toString()===data.room.toString())
 		{
 			$('#credits_amount').attr('style','color:red;');
@@ -94,7 +97,7 @@ $(document).ready(function(){
 	function initRTCMultiConnection(){
 		const connection = new RTCMultiConnection();
 		
-		connection.socketURL = _protocol+'://'+location.hostname+videoRTCPort+"/";
+		connection.socketURL = 	_protocol+'://'+location.hostname+videoRTCPort+"/";
 		connection.socketMessageEvent = 'audio-video-file-chat-demo';
 		
 		 connection.session = {
@@ -129,25 +132,7 @@ $(document).ready(function(){
 				console.log('started playing! '+room);
 				socket.emit('video started',room);
 				mediaElement.media.play();
-			}, 0);
-
-			//с расчетом на то что видосиков только 2 
-			if(isFirstVideoFlag){
-				$($('#videos-container').children()[0]).addClass('localVideo');
-				isFirstVideoFlag=false;
-			}
-			//скрываем нерабочие окна КОСТЫЛЬ!
-			else if($('#videos-container').children().length>1){
-				$($('#videos-container').children()[$('#videos-container').children().length-1]).addClass('remoteVideo');
-				var _length=$('#videos-container').children().length;
-				if(_length>2)
-					for(var i=1;i<_length-1;i++){
-						//sdelati .remove()
-						$($('#videos-container').children()[i]).remove();
-						
-					}
-			}
-			
+			}, 5000);
 		};
 		
 		connection.onstreamended = function(event) {

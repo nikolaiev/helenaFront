@@ -1,6 +1,9 @@
 let _socket;//global videodate _socket in current window
-let chatWindow;
+
 $(document).ready(function(){
+
+	let chatWindow;
+
 	window.onbeforeunload=function(){//çàêðûòèå ìàëåíüêîãî îêíà
 			chatWindow.close();
 			_socket.emit('browser window close');
